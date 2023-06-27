@@ -1,0 +1,54 @@
+{% extends 'core/base_admin.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block content %}
+    {% block extra_css %}    
+    {% endblock extra_css %}    
+    <header class='mb-4'>
+        <h2 class='h2 medium text-blue'>Devolución</h2>
+    </header>
+    <div class="col-md-11">
+        <div class="mb-3">
+            <div class="d-flex flex-column align-items-center align-items-lg-start">
+                <form method="post" action="{% url 'ventas_venta_save' %}">
+                    {% csrf_token %}
+                    <div class="col-12 col-lg-12 row row-cols-1 row-cols-md-1 g-2 p-lg-0-5">
+
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Motivo de devolución</label>
+                            <input type="text" class="form-control" name="motivoDev" id="motivoDev" placeholder="Escriba el motivo de la devolución" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" name="direccionDev" id="direccionDev" placeholder="Ingrese la dirección" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Fecha de devolución</label>
+                            <input type="text" class="form-control" name="fechaDev" id="fechaDev" placeholder="Ingrese la fecha de la devolución" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Correo</label>
+                            <input type="text" class="form-control" name="correoDev" id="correoDev" placeholder="Ingrese un correo" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <div class="d-flex justify-content-center mb-2">
+                                <div class="d-flex justify-content-center mx-0-5--custom">
+                                    <button type="submit" class="button">Crear</button>
+                                </div>
+                                <div class="d-flex justify-content-center mx-0-5--custom">
+                                    <a href="{% url 'base_ventas' %}" class="button">Regresar</a>
+                                </div>  
+                            </div>                                  
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% block extrajs %}    
+    {% endblock extrajs %}    
+{% endblock %}

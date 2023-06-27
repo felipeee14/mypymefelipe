@@ -1,0 +1,35 @@
+{% extends 'core/base_admin.html' %}
+{% load static %}
+{% block content %}
+{% block extrahead %}
+
+{% endblock %}
+    <main role="main">
+        <div class="container col-12 mt-3">
+            <div class="col-12  mt-3 border">
+                <h3 class="px-5 py-4" style="text-align: center;">Gestión De Usuarios </h3> 
+                <div class="row mt-4 mb-4">
+                    {% if profiles.group_id == 1%}
+                        <div class="col-12 col-sm-3 mb-3">
+                            <a href="{% url 'new_user' %}" class="boton form-control">Nuevo Usuario</a>
+                        </div>
+                        <div class="col-12 col-sm-3 mb-3">
+                            <a href="{% url 'new_group' %}" class="boton form-control">Nuevo Grupo</a>
+                        </div>
+                    {% endif %}
+                    {% for g in groups %}
+                        <div class="col-12 col-sm-3 mb-3">
+                            <a href="{% url 'list_main' g.id %}" class="boton form-control">listado perfil</a>
+                        </div>
+                    {% endfor %}
+                    <div class="col-12 col-sm-3 mb-3">
+                        <a href="{% url 'carga_masiva_user' %}" class="boton form-control">Carga masiva</a>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3 mb-3">
+                    <a href="{% url 'admin_main' %}" class="botton form-control" style="padding: 4px; margin-top: 4px;">Volver</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

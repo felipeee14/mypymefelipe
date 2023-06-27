@@ -1,0 +1,50 @@
+{% extends 'core/base_admin.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<header class='mb-4'>
+    <h2 class='h2 medium text-blue'>Ver Insumo</h2>
+</header>
+<div class="col-md-11">
+    <div class="mb-3">
+        <div class="d-flex flex-column align-items-center align-items-lg-start">
+            <form method="post" action="{% url 'insumos_edit' insumos_id=insumos_data.id %}">
+                {% csrf_token %}
+                <div class="col-12 col-lg-12 row row-cols-1 row-cols-md-1 g-2 p-lg-0-5">
+                    <div class="mb-0 col-md-12">
+                        <label for="insumos_name" class="form-label">Nombre Insumo</label>
+                        <input type="text" class="form-control" name="insumos_name" id="insumos_name" value="{{insumos_data.insumos_name}}" placeholder="Nombre insumo" style="text-transform: capitalize;" required>
+                        <div class="feedback body--small normal"></div>
+                    </div>
+                    <div class="mb-0 col-md-12">
+                        <label for="insumos_price" class="form-label">Precio Insumo</label>
+                        <input type="text" class="form-control" name="insumos_price" id="insumos_price" value="{{insumos_data.insumos_price}}" placeholder="Precio del insumo" style="text-transform: capitalize;" required>
+                        <div class="feedback body--small normal"></div>
+                    </div>
+                    <div class="mb-0 col-md-12">
+                        <label for="insumos_state" class="form-label">Estado Insumo</label>
+                        <input type="text" class="form-control" name="insumos_state" id="insumos_state" value="{{insumos_data.insumos_state}}" placeholder="Estado" style="text-transform: capitalize;" required>
+                        <div class="feedback body--small normal"></div>
+                    </div> 
+                    <div class="mb-0 col-md-12">
+                        <div class="d-flex justify-content-center mb-2">
+                            <div class="d-flex justify-content-center mx-0-5--custom">
+                                <button type="submit" class="button">Editar</button>
+                            </div> 
+                            <div class="d-flex justify-content-center mx-0-5--custom">
+                                <a href="{% url 'insumos_list' %}" class="button">Regresa</a>
+                            </div>  
+                            <div class="d-flex justify-content-center mx-0-5--custom">
+                                <a href="{% url 'insumos_delete' insumos_id=insumos_data.id %}">Eliminar</a>
+                            </div>                                  
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

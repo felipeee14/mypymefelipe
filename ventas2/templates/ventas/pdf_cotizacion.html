@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>Cotizacion</h2>
+        <table border="1">
+            <thead>
+                <th>Nombre Producto</th>
+                <th>Precio Producto</th>
+                <th>Cantidad Producto</th>
+                <th>Monto total</th>
+                <th>Estado</th>
+            </thead>
+            <tbody>
+                {% for h in Venta2 %}
+                    <tr>
+                        <td>{{ h.nombreProducto }}</td>
+                        <td>{{ h.precioProducto }}</td>
+                        <td>{{ h.cantidadProductos }}</td>
+                        <td>{{ h.montoTotal }}</td>
+                        <td>{{ h.estado }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,143 @@
+{% extends 'core/base_admin.html' %}
+{% load manifest %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Gestion de ventas</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" >
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Round" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+        <link href="{% manifest 'styles.scss' %}"rel="stylesheet">
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+        <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <nav id="sidebar" class='side-bar to-left' style="background-color:#caf1ff">
+            <header class='my-xxl-4 my-1 mb-5'>
+                <div id="expand-side-bar" class="float-button">
+                    <div class="m-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="30px"
+                            viewBox="0 0 24 24" width="30px"
+                            fill="#caf1ff">
+                            <g>
+                                <rect fill="none" height="24" width="24"/>
+                            </g>
+                            <g>
+                                <g>
+                                    <polygon points="15.5,5 11,5 16,12 11,19 15.5,19 20.5,12"/>
+                                    <polygon points="8.5,5 4,5 9,12 4,19 8.5,19 13.5,12"/>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                    <a href="{% url 'base_ventas' %}" >
+                        <img class="logo my-2" src="{% static 'assets/svg/logo.svg' %}" alt="Ventas"/>
+                        <a2 class='h5 medium text-blue'>Gestión de ventas</a2>
+                    </a>
+                    
+                    <div style="display: flex; flex-direction: column;align-items: center;">
+                        <div class="avatar-normal-container">
+                            <img src="{% static 'assets/img/no-avatar.jpg' %}" alt="avatar">
+                        </div>
+                    </div>
+            </header>
+            <div class='menu'>
+                <!--=== Menu 1 ===-->  
+                {% if template_name == 'ventas/ventas_venta_add/' %}
+                    <a href="{% url 'ventas_venta_add' %}" class='item active'>
+                {% else %}
+                    <a href="{% url 'ventas_venta_add' %}" class='item'>
+                {% endif %}
+                    <span class="material-symbols-outlined" style="color:black !important;">
+                        shopping_cart
+                    </span>
+                    <p style = "color: black;" class='body--small bold'>Crear venta</p>
+                </a>
+                <!--=== Menu 2 ===-->  
+                {% if template_name == 'ventas/ventas_list_venta/' %}
+                    <a href="{% url 'ventas_list_venta' %}" class='item active'>
+                {% else %}
+                    <a href="{% url 'ventas_list_venta' %}" class='item'>
+                {% endif %}
+                    <span class="material-symbols-outlined" style="color:black !important;">
+                        list_alt
+                    </span>
+                    <p style = "color: black;" class='body--small bold'>Listado de ventas</p>
+                </a>     
+                <!--=== Menu 3 ===-->  
+                {% if template_name == 'ventas/ventas_devolucion/' %}
+                    <a href="{% url 'ventas_venta_devolucion' %}" class='item active'>
+                {% else %}
+                    <a href="{% url 'ventas_venta_devolucion' %}" class='item'>
+                {% endif %}
+                    <span class="material-symbols-outlined" style="color:black !important;">
+                        currency_exchange
+                    </span>
+                    <p style = "color: black;" class='body--small bold'>Devolución</p>
+                </a>                             
+            </div>
+            <div class='side-bar-footer mb-5'>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <button class='button' type="submit">Cerrar Sesión</button>
+                    </form>                    
+            </div>
+        </nav>
+        <div class='dashboard-container'>
+            {% block content %}
+    {% block extra_css %}    
+    {% endblock extra_css %}    
+    <div class="col-md-11">
+        <div class="mb-3">
+            <header class='mb-4'>
+                <h2 class='h2 medium text-blue' style='margin-left:55px;'>Módulo Gestión de ventas</h2>
+            </header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div class="card bg-skin" style="width: auto;">
+                            <div class="card-body">
+                                <h3 class="card-title" style="text-align: center">Ventas</h3>
+                                <div class="d-flex justify-content-center mx-0-5--custom">
+                                    <p class="card-text">{% lorem 1 b random %}</p>
+                                </div>
+                                <div class="d-flex justify-content-center mx-0-5--custom mt-2">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="{% url 'ventas_venta_add' %}" class="btn" >
+                                        Crear venta
+                                    </a>
+                                    <a href="{% url 'ventas_list_venta' %}" class="btn" >
+                                        Listado de ventas
+                                    </a>
+                                    <a href="{% url 'ventas_venta_devolucion' %}" class="btn" >
+                                        Devolución
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                  
+                </div>
+            </div>            
+        </div>
+    </div>
+    {% block extrajs %}    
+    {% endblock extrajs %}    
+{% endblock %}
+        </div>
+        <script src="{% manifest 'sidebar.js' %}"></script>
+        <script src="{% static 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    </body>
+</html>

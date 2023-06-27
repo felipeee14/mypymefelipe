@@ -1,0 +1,58 @@
+{% extends 'core/base_admin.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block content %}
+    {% block extra_css %}    
+    {% endblock extra_css %}    
+    <header class='mb-4'>
+        <h2 class='h2 medium text-blue'>Registrar venta</h2>
+    </header>
+    <div class="col-md-11">
+        <div class="mb-3">
+            <div class="d-flex flex-column align-items-center align-items-lg-start">
+                <form method="post" action="{% url 'ventas_venta_save' %}">
+                    {% csrf_token %}
+                    <div class="col-12 col-lg-12 row row-cols-1 row-cols-md-1 g-2 p-lg-0-5">
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Nombre del producto</label>
+                            <input type="text" class="form-control" name="nombreProducto" id="nombreProducto" placeholder="Ingrese el nombre del producto" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Cantidad de productos</label>
+                            <input type="number" class="form-control" name="cantidadProductos" id="cantidadProductos" placeholder="Ingrese la cantidad de productos" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Precio Producto</label>
+                            <input type="number" class="form-control" name="precioProducto" id="precioProducto" placeholder="Ingrese el precio del producto" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Estado</label>
+                            <select type="text" class="form-control" name="estado" id="estado" required>
+                                <option value="default" style="display:none;">Seleccione el estado</option>
+                                <option>En curso</option>
+                                <option>Finalizada</option>
+                                <option>Cancelada</option>
+                            </select> 
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <div class="d-flex justify-content-center mb-2">
+                                <div class="d-flex justify-content-center mx-0-5--custom">
+                                    <button type="submit" class="button">Crear</button>
+                                </div>
+                                <div class="d-flex justify-content-center mx-0-5--custom">
+                                    <a href="{% url 'base_ventas' %}" class="button">Regresar</a>
+                                </div>  
+                            </div>                                  
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% block extrajs %}    
+    {% endblock extrajs %}    
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'core/base_admin.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block content %}
+    {% block extra_css %}    
+    {% endblock extra_css %}    
+    <header class='mb-4'>
+        <h2 class='h2 medium text-blue'>Ver venta</h2>
+    </header>
+    <div class="col-md-11">
+        <div class="mb-3">
+            <div class="d-flex flex-column align-items-center align-items-lg-start">
+                <form method="post" action="{% url 'ventas_venta_edit_estado' venta_data.id %}">
+                    {% csrf_token %}
+                    <div class="col-12 col-lg-12 row row-cols-1 row-cols-md-1 g-2 p-lg-0-5">
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Nombre del producto</label>
+                            <input type="text" disabled="disabled" class="form-control" name="nombreProducto" id="nombreProducto" value="{{venta_data.nombreProducto}}" placeholder="Nombre del producto" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Cantidad productos</label>
+                            <input type="text" disabled="disabled" class="form-control" name="cantidadProductos" id="cantidadProductos" value="{{venta_data.cantidadProductos}}" placeholder="Numero de productos (1 ,2 3...)" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Precio producto</label>
+                            <input type="text" disabled="disabled" class="form-control" name="precioProducto" id="precioProducto" value="{{venta_data.precioProducto}}" placeholder="precio producto" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Monto total</label>
+                            <input type="text" disabled="disabled" class="form-control" name="montoTotal" id="montoTotal" value="{{venta_data.montoTotal}}" placeholder="precio producto" required>
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <label for="category_description" class="form-label">Estado</label>
+                            <select type="text" class="form-control" name="estado" id="estado" required>
+                                <option value="default" style="display:none;">Seleccione el estado</option>
+                                <option>En curso</option>
+                                <option>Finalizada</option>
+                                <option>Cancelada</option>
+                            </select> 
+                            <div class="feedback body--small normal"></div>
+                        </div>
+                        <div class="mb-0 col-md-12">
+                            <div class="d-flex justify-content-center mb-2">
+                                <div class="d-flex justify-content-center mx-0-5--custom">
+                                    <button type="submit" class="button">Editar</button>
+                                </div>
+                                <div class="d-flex justify-content-center mx-0-5--custom">
+                                    <a href="{% url 'ventas_list_venta' %}" class="button">Regresar</a>
+                                </div>  
+                            </div>                                  
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% block extrajs %}    
+    {% endblock extrajs %}    
+{% endblock %}

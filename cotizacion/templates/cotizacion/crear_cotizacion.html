@@ -1,0 +1,98 @@
+{% extends 'core/base_admin.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block content %}
+    {% block extra_css %}
+    {% endblock extra_css %}
+    <header class='mb-4'>
+        <h2 class='h2 medium text-blue'>Nueva Cotizacion</h2>
+    </header>
+    <div class="col-12 col-lg-12 row row-cols-1 row-cols-md-1 g-2 p-lg-0-5">
+        <form method="POST" >
+            {% csrf_token %}
+            <div class="mb-0 col-md-12">
+                <label class="required" for="category_name">Cliente:</label>
+                <select name="provider" id="provider" class="form-control border border-danger" required>
+                    <option value="NONE">Seleccionar un cliente</option>
+                    {% for client in client_list %}
+                        <option value="{{ client.id }}">{{ client.proveedor_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-0 col-md-12">
+                <label class="required" for="category_name">Producto:</label>
+                <select name="product" id="product" class="form-control border border-danger" required>
+                    <option value="">----------</option>
+                    {% for product in product_list %}
+                        <option value="{{ product.id }}">{{ product.product_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-0 col-md-12" style="margin-top: 50px;">
+                <div class="d-flex justify-content-center mb-2">
+                    <div class="d-flex justify-content-center mx-0-5--custom">
+                        <button type="submit" class="button">Crear</button>
+                    </div>
+                    <div class="d-flex justify-content-center mx-0-5--custom">
+                        <a href="{% url 'cotizaciones_main' %}" class="button">Regresar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="cart_items">
+            {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.product_name }}</td>
+                    <td>{{ item.product.product_price }}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="'decreaseQuantity({{ item.id }})'">-</button>
+                        <span id="quantity{{ item.id }}">{{ item.quantity }}</span>
+                        <button class="btn btn-primary btn-sm" onclick="'increaseQuantity( item.id )'">+</button>
+                    </td>
+                    <td>{{ item.monto_total }}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="'removeFromCart(`{{ item.id }}`)'">Eliminar</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function increaseQuantity(itemId) {
+            var quantityElement = document.getElementById('quantity' + itemId);
+            var currentQuantity = parseInt(quantityElement.innerHTML);
+            quantityElement.innerHTML = currentQuantity + 1;
+        }
+
+        function decreaseQuantity(itemId) {
+            var quantityElement = document.getElementById('quantity' + itemId);
+            var currentQuantity = parseInt(quantityElement.innerHTML);
+            if (currentQuantity > 1) {
+                quantityElement.innerHTML = currentQuantity - 1;
+            }
+        }
+
+        function removeFromCart(itemId) {
+            // Implementa aquí la lógica para eliminar el producto del carrito
+        }
+
+        
+    </script>
+
+    {% block extrajs %}
+    {% endblock extrajs %}
+{% endblock %}
